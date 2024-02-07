@@ -1,0 +1,48 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.DetailsCarModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "DetailsCar";
+}
+<div class="back">
+    <a asp-page="ListCar" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+<h1><i class="fa-regular fa-file-lines"></i>  <i class="fa-solid fa-car"></i></h1>
+
+<hr />
+<div class="dl-div">
+    <dl>
+        <dt>
+            Märke
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.Brand)
+        </dd>
+        <dt>
+            Modell
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.CarModel)
+        </dd>
+        <dt>
+            Pris/Dygn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.PricePerDay)
+        </dd>
+        <dt>
+            Uthyrd
+        </dt>
+        <dd >
+            @Html.DisplayFor(model => model.Car.IsRented)
+        </dd>
+        <dt>
+            Bild
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.Picture)
+        </dd>
+    </dl>
+</div>

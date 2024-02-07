@@ -1,0 +1,49 @@
+﻿@page
+@model RazorFriberg.Pages.Customer.CreateRentModel
+
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "CreateRent";
+}
+<div class="back">
+    <a asp-page="/Customer/Index" asp-route-id="@Model.Customer.Id">&larr; Tillbaka</a>
+</div>
+<h1>Hyr en bil</h1>
+@{
+    // TODO: Färg/knapp?
+}
+ <a asp-page="ShowCars" asp-route-id="Customer.Id">Vill du se över alla bilar? Tryck här</a> 
+<hr />
+<div>
+    <div class="form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" ></div>
+            <input type="hidden" asp-for="Customer.Id" />
+            <div>
+                <label asp-for="Rent.StartDate" >Från</label>
+                <input asp-for="Rent.StartDate"  />
+                <span asp-validation-for="Rent.StartDate" ></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rent.RenturnDate" >Till</label>
+                <input asp-for="Rent.RenturnDate" />
+                <span asp-validation-for="Rent.RenturnDate" ></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rent.Car.Id">Bilens Id:</label>
+                <input asp-for="Rent.Car.Id" />
+                <span asp-validation-for="Rent.Car.Id" ></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Boka" class="input-button" onclick="showModal()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

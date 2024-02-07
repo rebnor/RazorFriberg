@@ -1,0 +1,42 @@
+﻿@page
+@model RazorFriberg.Pages.LogInAdminModel
+
+@{
+    ViewData["Title"] = "LogInAdmin";
+}
+
+
+@* <div class="back">
+    <a asp-page="Index" >&larr; Tillbaka</a>
+</div> *@
+<h1><i class="fa-solid fa-user-tie"></i></h1>
+
+
+<p>@ViewData["Wrong"]</p>
+<hr />
+
+<div class="form">
+    <form method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        <div>
+            <label asp-for="Admin.UserName">Användarnamn: </label>
+            <input asp-for="Admin.UserName" class="textbox" />
+            <span asp-validation-for="Admin.UserName"></span>
+        </div>
+        <div>
+            <label asp-for="Admin.Password">Lösenord: </label>
+            <input asp-for="Admin.Password" class="textbox" />
+            <span asp-validation-for="Admin.Password"></span>
+        </div>
+        <div>
+            <input type="submit" value="Logga in" class="input-button" />
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

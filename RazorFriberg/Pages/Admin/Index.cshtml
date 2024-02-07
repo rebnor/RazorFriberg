@@ -1,0 +1,20 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.IndexModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+<h1>Välkommen @ViewData["User"]</h1>
+
+<div class="index-admin">
+    <div>
+        <a asp-page="ListCar" asp-route-id="@Model.Admin.Id"><i class="fa-solid fa-angles-right"></i> Visa alla bilar <i class="fa-solid fa-car-side"></i> </a>
+    </div>
+    <div>
+        <a asp-page="ListCustomer" asp-route-id="@Model.Admin.Id"><i class="fa-solid fa-angles-right"></i> Visa alla kunder <i class="fa-solid fa-user"></i></a>
+    </div>
+    <div>
+        <a asp-page="ListRent" asp-route-id="@Model.Admin.Id"><i class="fa-solid fa-angles-right"></i> Visa alla uthyrningar <i class="fa-regular fa-file-lines"></i></a>
+    </div>
+</div>

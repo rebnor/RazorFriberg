@@ -1,0 +1,21 @@
+﻿@page
+@model RazorFriberg.Pages.Customer.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1><i class="fa-solid fa-trash-can"></i></h1>
+
+<h3 class="question">Är du säker på att du vill avsluta ditt medlemsskap hos oss?</h3>
+<div>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Customer.Id" />
+        <input type="submit" value="Delete" class="input-button danger " /> |
+    </form>
+    <button>
+        <a asp-page="/Customer/Index" asp-route-id="@Model.Customer.Id">Nej, Avbryt!</a>
+    </button>
+
+</div>

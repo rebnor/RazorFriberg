@@ -1,0 +1,39 @@
+﻿@page
+@model RazorFriberg.Pages.NewCustomerConfirmedModel
+
+@{
+    ViewData["Title"] = "NewCustomerConfirmed";
+}
+
+    <h1>Klart!</h1>
+    <h3>Du kan nu logga in på ditt konto för att hyra bil</h3>
+    <hr />
+<div class="dl-div">
+    <dl>
+        <dt>
+            ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Id)
+        </dd>
+        <dt>
+            Namn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+        <dt>
+            Lösenord
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Password)
+        </dd>
+    </dl>
+</div>

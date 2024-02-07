@@ -1,0 +1,52 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.DeleteCustomerModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "DeleteCustomer";
+}
+
+<div class="back">
+    <a asp-page="ListCustomer" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+<h1><i class="fa-solid fa-trash-can"></i></h1>
+<hr />
+
+<h3 class="question">Är du säker på att du vill ta bort kund #@Html.DisplayFor(model => model.Customer.Id)?</h3>
+<div class="dl-div center-me">
+
+    <dl>
+        <dt>
+            ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Id)
+        </dd>
+        <dt>
+            Namn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            E-mail
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+        <dt>
+            Lösenord
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Password)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Customer.Id" />
+        <input type="hidden" asp-for="Admin.Id" />
+        <input type="submit" value="Delete" class="input-button danger delete" onclick="RemovedCustomer()" />
+    </form>
+</div>

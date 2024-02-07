@@ -1,0 +1,11 @@
+﻿@page
+@model RazorFriberg.Pages.DetailsCarModel
+
+@{
+    ViewData["Title"] = "DetailsCar";
+}
+
+<h1>@Html.DisplayFor(model => model.Car.Brand) @Html.DisplayFor(model => model.Car.CarModel)</h1>
+<p class="detailsCar">ID #@Html.DisplayFor(model => model.Car.Id) | Pris/Dygn: @Html.DisplayFor(model => model.Car.PricePerDay)kr</p>
+<img class="car-image" src="@Url.Content(@Model.Car.Picture)" alt="Hittar inte foto" width="650" height="450" />
+

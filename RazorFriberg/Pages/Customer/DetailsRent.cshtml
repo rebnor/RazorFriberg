@@ -1,0 +1,46 @@
+﻿@page
+@model RazorFriberg.Pages.Customer.DetailsRentModel
+
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "DetailsRent";
+}
+<div class="back">
+    <a asp-page="/Customer/MyRents" asp-route-id="@Model.Customer.Id">&larr; Tillbaka</a>
+</div>
+<h1>Information om bokning</h1>
+<hr />
+<div class="dl-div">
+    <dl>
+        <dt>
+            Bil
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rent.Car.Brand) @Html.DisplayFor(model => model.Rent.Car.CarModel)
+        </dd>
+        <dt>
+            Datum
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rent.StartDate) - @Html.DisplayFor(model => model.Rent.RenturnDate)
+        </dd>
+        <dt>
+            Pris/Dygn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rent.Car.PricePerDay)kr
+        </dd>
+        <dt>
+            Totalt    
+        </dt>
+        <dd>
+            @ViewData["TotalPrice"]kr
+        </dd>
+    </dl>
+</div>
+<div>
+    @if(Model.Rent.StartDate >= DateTime.Now)
+    { // TODO: Röd färg/knapp
+        <a asp-page="./DeleteRent" asp-route-id="@Model.Rent.Id">Avbryt bokning</a>
+    }
+</div>

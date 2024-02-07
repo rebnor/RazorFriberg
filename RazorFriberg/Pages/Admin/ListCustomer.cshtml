@@ -1,0 +1,66 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.ListCustomerModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "ListCustomer";
+}
+<div class="back">
+    <a asp-page="/Admin/Index" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+
+<h1>Alla kunder</h1>
+<hr />
+
+<p class="edits createNew">
+    <a asp-page="CreateCustomer" asp-route-id="@Model.Admin.Id"><i class="fa-solid fa-angles-right"></i> Lägg till ny kund <i class="fa-solid fa-angles-left"></i></a>
+</p>
+<table class="table create-customer">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Förnamn
+            </th>
+            <th>
+                Efternamn
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Lösenord
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Customer) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                    <a asp-page="./EditCustomer" asp-route-id="@item.Id" asp-route-adminid="@Model.Admin.Id"><i class="fa-solid fa-pencil"></i></a> |
+                    <a asp-page="./DetailsCustomer" asp-route-id="@item.Id" asp-route-adminid="@Model.Admin.Id"><i class="fa-solid fa-circle-info"></i></a> |
+                    <a asp-page="./DeleteCustomer" asp-route-id="@item.Id" asp-route-adminid="@Model.Admin.Id"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

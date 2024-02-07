@@ -1,0 +1,44 @@
+﻿@page
+@model RazorFriberg.Pages.Customer.ShowCarsModel
+
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "ShowCars";
+}
+<div class="back">
+    <a asp-page="/Customer/Index" asp-route-id="@Model.Customer.Id">&larr; Tillbaka</a>
+</div>
+<h1>Alla bilar</h1>
+@{
+    // TODO: Knapp/Design
+}
+<a asp-page="CreateRent" asp-route-id="@Model.Customer.Id">Hyr en bil</a>
+<div class="cars">
+    @foreach (var item in Model.TheCars)
+    {
+        <div class="car">
+            <h1>ID: @Html.DisplayFor(modelItem => item.Id)</h1>
+            <p class="small">*Spara ID om du vill boka bilen*</p>
+            <h2 class="detailsCar">@Html.DisplayFor(modelItem => item.Brand) - @Html.DisplayFor(modelItem => item.CarModel)</h2>
+            <p class="detailsCar">@Html.DisplayFor(modelItem => item.PricePerDay)kr/dygn</p>
+
+            @if (item.Picture != null)
+            {
+                <div class="image">
+                    <img class="car-image" src="@Url.Content(item.Picture)" alt="Hittar inte foto" width="200" height="120" />
+                </div>
+            }
+
+            @*  FÅR BARA MED CUSTOMER-ID?   
+            <form method="post">
+                <input type="hidden" asp-for="@item.Id" />
+                <input type="hidden" asp-for="Customer.Id" />
+                <input type="submit" value="Info" class="input-button" />
+            </form> *@
+          @*   <div class="edits">
+                <a asp-page="DetailsCar" asp-route-id="Customer.Id"><i class="fa-solid fa-angles-right"></i>Info om Bil<i class="fa-solid fa-angles-left"></i></a>
+            </div> *@
+
+        </div>
+    }
+</div>

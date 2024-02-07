@@ -1,0 +1,57 @@
+﻿@page
+@model RazorFriberg.Pages.Customer.MyRentsModel
+
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "MyRents";
+}
+<div class="back">
+    <a asp-page="/Customer/Index" asp-route-id="@Model.Customer.Id">&larr; Tillbaka</a>
+</div>
+<h1>Mina Bokningar</h1>
+@{
+    // TODO: Färg/Knapp?
+}
+<p>
+    <a asp-page="CreateRent" asp-route-id="@Model.Customer.Id">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Bil
+            </th>
+            <th>
+                Startdatum
+            </th>
+            <th>
+                Slutdatum
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rent) {
+            var isReturnDateBehindToday = item.RenturnDate <= DateTime.Today;
+            var isStartDateClose = item.StartDate == DateTime.Today;
+            var rowClass = isReturnDateBehindToday ? "past-due" : "";
+            var rowDate = isStartDateClose ? "close" : "";
+
+
+        <tr class="@rowClass">
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Brand) - @Html.DisplayFor(modelItem => item.Car.CarModel)
+            </td>
+            <td class="@rowDate">
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RenturnDate)
+            </td>
+            <td class="edits">
+                    <a asp-page="./DetailsRent" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

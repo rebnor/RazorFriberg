@@ -1,0 +1,41 @@
+﻿@page
+@model RazorFriberg.Pages.LogInCustomerModel
+
+@{
+    
+    ViewData["Title"] = "LogInCustomer";
+}
+
+<h1><i class="fa-solid fa-user"></i></h1>
+
+<p>@ViewData["Wrong"]</p>
+
+<hr />
+
+<div class="form">
+    <form method="post">
+
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div>
+            <label asp-for="Customer.Email">Email: </label>
+            <input asp-for="Customer.Email" class="textbox" />
+            <span asp-validation-for="Customer.Email"></span>
+        </div>
+        <div>
+            <label asp-for="Customer.Password">Lösenord: </label>
+            <input asp-for="Customer.Password" class="textbox" />
+            <span asp-validation-for="Customer.Password"></span>
+        </div>
+        <div>
+            <input type="submit" value="Logga in" class="input-button" />
+        </div>
+    </form>
+</div>
+<p class="edits createNew">
+    <a asp-page="CreateCustomer"><i class="fa-solid fa-angles-right"></i> Skapa nytt konto <i class="fa-solid fa-angles-left"></i></a>
+</p>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

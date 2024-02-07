@@ -1,0 +1,51 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.DeleteCarModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "DeleteCar";
+}
+<div class="back">
+    <a asp-page="ListCar" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+<h1><i class="fa-solid fa-trash-can"></i></h1>
+<h2 class="question">Är du säker på att du vill ta bort denna bil?</h2>
+
+<hr />
+
+
+<div class ="dl-div center-me">
+    <dl>
+        <dt>
+            Märke
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.Brand)
+        </dd>
+        <dt>
+            Modell
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.CarModel)
+        </dd>
+        <dt>
+            Pris/Dygn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.PricePerDay)
+        </dd>
+        <dt>
+            Uthyrd
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.IsRented)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Car.Id" />
+        <input type="hidden" asp-for="Admin.Id" />
+        <input type="submit" value="Delete" class="input-button danger delete" onclick="RemovedCar()" />
+    </form>
+</div>

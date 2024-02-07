@@ -1,0 +1,59 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.CreateCarModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "CreateCar";
+}
+
+<div class="back">
+    <a asp-page="ListCar" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+<h1>Lägg till bil <i class="fa-solid fa-car-side"></i></h1>
+<hr />
+<div>
+    <div class="form">
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+            <input type="hidden" asp-for="Admin.Id" />
+            <div>
+                <label asp-for="Car.Brand">Märke:</label>
+                <input asp-for="Car.Brand" class="textbox" />
+                <span asp-validation-for="Car.Brand"></span>
+            </div>
+            <div>
+                <label asp-for="Car.CarModel">Modell:</label>
+                <input asp-for="Car.CarModel" class="textbox" />
+                <span asp-validation-for="Car.CarModel"></span>
+            </div>
+            <div>
+                <label asp-for="Car.PricePerDay">Kr/Dygn:</label>
+                <input asp-for="Car.PricePerDay" class="textbox" />
+                <span asp-validation-for="Car.PricePerDay"></span>
+            </div>
+            <div>
+                <p>Lägg in önskad bild i mappen "wwwroot/css/Pictures".<br /> Här skriver du endast namnet på bilden (utan ".jpg").<br />Har du ingen bild, skriv endast "-".</p>
+                <input asp-for="Car.Picture" class="textbox" />
+            </div>
+            <p class="small">(Du kan lägga in bild i efterhand.)</p>
+            <div class="checkboxarea">
+                <div class="MyCheckbox">
+                    <input class="checkbox" asp-for="Car.IsRented" /> 
+                <label class="checkbox">
+                    Uthyrd
+                </label>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Lägg till" class="input-button" onclick="SubmitNewCar()"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

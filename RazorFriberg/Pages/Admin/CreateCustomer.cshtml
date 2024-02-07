@@ -1,0 +1,51 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.CreateCustomerModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "CreateCustomer";
+}
+
+<div class="back">
+    <a asp-page="ListCustomer" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+
+<h1>Lägg till ny kund <i class="fa-solid fa-user"></i></h1>
+
+<hr />
+<div>
+    <div class="form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="Admin.Id" />
+            <div>
+                <label asp-for="Customer.FirstName">Förnamn: </label>
+                <input asp-for="Customer.FirstName" class="textbox" />
+                <span asp-validation-for="Customer.FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.LastName">Efternamn: </label>
+                <input asp-for="Customer.LastName" class="textbox" />
+                <span asp-validation-for="Customer.LastName"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.Email">E-mail: </label>
+                <input asp-for="Customer.Email" class="textbox" />
+                <span asp-validation-for="Customer.Email"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.Password">Lösenord: </label>
+                <input asp-for="Customer.Password" class="textbox" />
+                <span asp-validation-for="Customer.Password"></span>
+            </div>
+            <div>
+                <input type="submit" value="Create" class="input-button" onclick="SubmitNewCustomer()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

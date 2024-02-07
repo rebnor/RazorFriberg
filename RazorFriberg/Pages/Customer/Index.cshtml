@@ -1,0 +1,72 @@
+﻿@page "CustomerIndex"
+@model RazorFriberg.Pages.Customer.IndexModel
+
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "Index";
+}
+
+<h1>Välkommen @ViewData["User"]</h1>
+
+<div class="rentOrHistory">
+
+        <a asp-page="ShowCars" asp-route-id="@Model.Customer.Id">Hyr en bil</a>
+
+
+
+        <a asp-page="MyRents" asp-route-id="@Model.Customer.Id">Historik</a>
+ 
+</div>
+
+
+@* <form method="post">
+    <input type="hidden" asp-for="Customer.Id" />
+    <input type="submit" value="Mina Bokningar" class="input-button" />
+</form> *@
+
+<hr />
+
+<h1><i class="fa-regular fa-file-lines"></i> <i class="fa-solid fa-user"></i> </h1>
+
+<div class="dl-div">
+    <dl>
+        <dt>
+            Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Id)
+        </dd>
+        <dt>
+            Namn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            E-mail
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+        <dt>
+            Lösenord
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Password)
+        </dd>
+    </dl>
+</div>
+
+<div class="edits">
+    <a asp-page="Edit" asp-route-id="@Model.Customer.Id"><i class="fa-solid fa-angles-right"></i> Redigera <i class="fa-solid fa-pencil"></i></a>
+</div>
+
+<hr />
+@{ //TODO: Gör text röd 
+    }
+<div class="delete-me">
+    <div class="edits red">
+        <a asp-page="Delete" asp-route-id="@Model.Customer.Id"><i class="fa-solid fa-angles-right"></i>Avsluta medlemsskap</a>
+    </div>
+</div>

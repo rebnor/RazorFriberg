@@ -1,0 +1,55 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.EditCustomerModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "EditCustomer";
+}
+
+<div class="back">
+    <a asp-page="ListCustomer" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+<h1><i class="fa-solid fa-pencil"></i>  <i class="fa-solid fa-user"></i> </h1>
+
+<hr />
+
+
+<div>
+    <div class="form">
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+            <input type="hidden" asp-for="Customer.Id" />
+            <input type="hidden" asp-for="Admin.Id" />
+            <div>
+                <label asp-for="Customer.FirstName">Förnamn: </label>
+                <input asp-for="Customer.FirstName" class="textbox" id="fname" />
+                <span asp-validation-for="Customer.FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.LastName">Efternamn: </label>
+                <input asp-for="Customer.LastName" class="textbox" id="lname" />
+                <span asp-validation-for="Customer.LastName"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.Email">E-mail: </label>
+                <input asp-for="Customer.Email" class="textbox" id="email" />
+                <span asp-validation-for="Customer.Email"></span>
+            </div>
+            <div>
+                <label asp-for="Customer.Password">Lösenord: </label>
+                <input asp-for="Customer.Password" class="textbox" id="pword" />
+                <span asp-validation-for="Customer.Password"></span>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="input-button" id="submit-customer" onclick="SubmitChanges()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,46 @@
+﻿@page
+@model RazorFriberg.Pages.Admin.DetailsCustomerModel
+
+@{
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "DetailsCustomer";
+}
+
+<div class="back">
+    <a asp-page="ListCustomer" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
+
+<h1><i class="fa-regular fa-file-lines"></i> <i class="fa-solid fa-user"></i> </h1>
+<hr />
+
+<div class="dl-div">
+
+    <dl>
+        <dt>
+            Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Id)
+        </dd>
+        <dt>
+            Namn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            E-mail
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+        <dt>
+            Lösenord
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Password)
+        </dd>
+    </dl>
+</div>
