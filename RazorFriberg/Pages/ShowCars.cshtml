@@ -14,12 +14,9 @@
 
             <h2 class="detailsCar">@Html.DisplayFor(modelItem => item.Brand) - @Html.DisplayFor(modelItem => item.CarModel)</h2>
             <p class="detailsCar">@Html.DisplayFor(modelItem => item.PricePerDay)kr/dygn</p>
-        @if (item.Picture != null)
-        {
             <div class="image">
                     <img class="car-image" src="@Url.Content(item.Picture)" alt="Ingen bild tyvärr" width="200" height="120" />
             </div>
-        }
             <div class="edits">
                 <a asp-page="DetailsCar" asp-route-id="@item.Id"><i class="fa-solid fa-angles-right"></i>Info om bil<i class="fa-solid fa-angles-left"></i></a>
         </div>

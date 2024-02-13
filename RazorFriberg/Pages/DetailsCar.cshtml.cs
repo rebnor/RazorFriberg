@@ -6,29 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorFriberg.Data;
+using RazorFriberg.Data.Interface;
 using RazorFriberg.Data.Models;
 
 namespace RazorFriberg.Pages
 {
     public class DetailsCarModel : PageModel
     {
-        private readonly RazorFriberg.Data.RazorFribergContext _context;
+        private readonly IHome homeRep;
 
-        public DetailsCarModel(RazorFriberg.Data.RazorFribergContext context)
+        public DetailsCarModel(IHome homeRep)
         {
-            _context = context;
+            this.homeRep = homeRep;
         }
 
         public Car Car { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var car = await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+            var car = homeRep.GetCarById(id);
             if (car == null)
             {
                 return NotFound();

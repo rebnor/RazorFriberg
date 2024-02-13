@@ -20,41 +20,19 @@ namespace RazorFriberg.Pages.Customer
             this.cusRep = cusRep;
         }
 
+        [BindProperty]
         public Rent Rent { get; set; } = default!;
         public Data.Models.Customer Customer { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task OnGetAsync(int id)
         {
             ViewData["TotalPrice"] = "";
             var rent = await cusRep.GetRentById(id);
             var customer = cusRep.GetCustumer(rent.Customer.Id);
-            if (rent == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                // TODO: Totalpris blir med tid 00:00:00 ? 
-                Rent = rent;
-                Customer = customer;
-                ViewData["TotalPrice"] = $"{(Rent.RenturnDate.Date.Date - Rent.StartDate.Date.Date) * Rent.Car.PricePerDay}";
-            }
-            return Page();
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
 
-            //var rent = await _context.Rents.FirstOrDefaultAsync(m => m.Id == id);
-            //if (rent == null)
-            //{
-            //    return NotFound();
-            //}
-            //else
-            //{
-            //    Rent = rent;
-            //}
-            //return Page();
+            Rent = rent;
+            Customer = customer;
+            ViewData["TotalPrice"] = $"{(Rent.RenturnDate.Date - Rent.StartDate.Date).TotalDays * Rent.Car.PricePerDay}";
         }
     }
 }

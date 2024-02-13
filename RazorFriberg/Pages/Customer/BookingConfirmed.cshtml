@@ -2,15 +2,14 @@
 @model RazorFriberg.Pages.Customer.BookingConfirmedModel
 
 @{
+    Layout = "_CustomerLayout";
     ViewData["Title"] = "BookingConfirmed";
 }
 
 <h1>Bokning genomförd!</h1>
-<p>Tack. Vi ses @Html.DisplayFor(model => model.Rent.StartDate) klockan 12:00 för upphämtning av bil!</p>
-
-<div>
-    <h4>Bokning</h4>
-    <hr />
+<h2>Tack. Vi ses @Html.DisplayFor(model => model.Rent.StartDate) klockan 12:00 för upphämtning av bil!</h2>
+<hr/>
+<div class="dl-div center-me">
     <dl>
         <dt>
             Bil
@@ -22,14 +21,14 @@
             Datum
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Rent.StartDate)
+            @Html.DisplayFor(model => model.Rent.StartDate) -
             @Html.DisplayFor(model => model.Rent.RenturnDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Rent.Car.PricePerDay)
+            Pris/Dygn
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Rent.RenturnDate)
+            @Html.DisplayFor(model => model.Rent.Car.PricePerDay)kr
         </dd>
         <dt>
             Totalt
@@ -39,6 +38,9 @@
         </dd>
     </dl>
 </div>
+@{
+    // TODO: Design/färg
+}
 <div>
-    <a asp-page="./MyRents" asp-route-id="@Model.Rent.Id">Kolla mina Bokningar</a>
+    <a asp-page="./MyRents" asp-route-id="@Model.Rent.Customer.Id">Kolla mina Bokningar</a>
 </div>

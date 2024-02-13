@@ -32,19 +32,5 @@ namespace RazorFriberg.Pages.Customer
             TheCars = await cusRep.GetRentableCarsAsync();
             Customer = c;
         }
-
-        // TODO: Får bara in customerID?
-        //public async Task<IActionResult> OnPostAsync(Data.Models.Car car, Data.Models.Customer customer)
-        //{
-        //    var theCar = cusRep.GetCarById(car.Id);
-        //    Car = theCar;
-
-        //    var theCustomer = cusRep.GetCustumer(customer.Id);
-        //    Customer = theCustomer;
-
-        //    Rent.Customer = Customer;
-        //    Rent.Car = theCar;
-        //    return RedirectToPage("CreateRent", "WithRent", Rent);
-        //}
     }
 }

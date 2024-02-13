@@ -38,9 +38,9 @@
         </dd>
     </dl>
 </div>
-<div>
-    @if(Model.Rent.StartDate >= DateTime.Now)
-    { // TODO: Röd färg/knapp
+<div class="red">
+    @if(Model.Rent.StartDate >= DateTime.Now) // Om startdatum är dagens datum eller högre än dagens datum så kan man avbryta bokning
+    {
         <a asp-page="./DeleteRent" asp-route-id="@Model.Rent.Id">Avbryt bokning</a>
     }
 </div>

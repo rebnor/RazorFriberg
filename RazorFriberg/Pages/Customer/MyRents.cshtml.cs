@@ -22,7 +22,7 @@ namespace RazorFriberg.Pages.Customer
         public Data.Models.Customer Customer { get; set; } = default!;
         public async Task OnGetAsync(Data.Models.Customer customer)
         {
-            if (customer.FirstName == null)
+            if (customer.FirstName == null) // om endast id följde med
             {
                 customer = cusRep.GetCustumer(customer.Id);
             }

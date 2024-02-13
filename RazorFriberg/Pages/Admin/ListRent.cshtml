@@ -3,9 +3,11 @@
 
 @{
     Layout = "_AdminLayout";
-
     ViewData["Title"] = "ListRent";
 }
+<div class="back">
+    <a asp-page="/Admin/Index" asp-route-id="@Model.Admin.Id">&larr; Tillbaka</a>
+</div>
 
 <h1>Alla uthyrningar</h1>
 

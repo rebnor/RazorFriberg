@@ -12,7 +12,7 @@
 @{
     // TODO: Färg/knapp?
 }
- <a asp-page="ShowCars" asp-route-id="Customer.Id">Vill du se över alla bilar? Tryck här</a> 
+ <a asp-page="ShowCars" asp-route-id="@Model.Customer.Id">Vill du se över alla bilar? Tryck här</a> 
 <hr />
 <div>
     <div class="form">
@@ -35,14 +35,11 @@
                 <span asp-validation-for="Rent.Car.Id" ></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Boka" class="input-button" onclick="showModal()" />
+                <input type="submit" value="Boka" class="input-button" />
             </div>
         </form>
     </div>
 </div>
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

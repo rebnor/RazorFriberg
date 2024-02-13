@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RazorFriberg.Data;
+using RazorFriberg.Data.Interface;
+using RazorFriberg.Data.Repository;
 
 namespace RazorFriberg.Pages
 {
     public class LogInAdminModel : PageModel
     {
-        private readonly RazorFribergContext _context;
+        private readonly IHome homeRep;
 
-        public LogInAdminModel(RazorFribergContext context)
+        public LogInAdminModel(IHome homeRep)
         {
-            _context = context;
+            this.homeRep = homeRep;
         }
 
         [BindProperty]
@@ -27,8 +29,6 @@ namespace RazorFriberg.Pages
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(Data.Models.Admin admin)
         {
 
@@ -36,20 +36,20 @@ namespace RazorFriberg.Pages
             {
                 ViewData["Wrong"] = "";
                 var theAdmin = new Data.Models.Admin();
-                if (!UserNameExists(admin.UserName)) // letar username
+                var au = homeRep.GetAdminByUsername(admin.UserName); // letar username
+                var ap = homeRep.GetAdminPassword(admin.Password); // letar password
+
+                if (au == null)
                 {
                     ViewData["Wrong"] = "Fel Användarnamn!";
                     return Page();
                 }
-                if (!PasswordExists(admin.Password)) // letar password
+                if (ap == null)
                 { 
                     ViewData["Wrong"] = "Fel Lösenord!";
                     return Page();
                 }
-                var ap = new Data.Models.Admin();
-                var au = new Data.Models.Admin();
-                ap = _context.Admins.FirstOrDefault(a=>a.Password == admin.Password); // hämtar användare med lösen
-                au = _context.Admins.FirstOrDefault(a=>a.UserName == admin.UserName); // hämtar användare med username
+
                 if (ap == au) // kollar att de är samma 
                 {
                     theAdmin = au;
@@ -57,15 +57,6 @@ namespace RazorFriberg.Pages
                 }
             }
             return Page();
-        }
-
-        private bool UserNameExists(string username)
-        {
-            return _context.Admins.Any(e => e.UserName == username);
-        }
-        private bool PasswordExists(string password)
-        {
-            return _context.Admins.Any(e => e.Password == password);
         }
     }
 }

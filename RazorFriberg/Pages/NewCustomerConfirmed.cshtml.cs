@@ -25,8 +25,6 @@ namespace RazorFriberg.Pages
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             var customer = homeRep.GetCustomerById(id);
-
-            //var customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();

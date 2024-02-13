@@ -2,20 +2,16 @@
 @model RazorFriberg.Pages.Customer.EditModel
 
 @{
+    Layout = "_CustomerLayout";
     ViewData["Title"] = "Edit";
 }
 
-@* <div class="back">
-    <form asp-action="BackToIndex">
-        <input type="hidden" asp-for="Customer.Id" />
-        <input type="submit" value="Tillbaka" />
-    </form>
-</div> *@
-
+<div class="back">
+    <a asp-page="/Customer/Index" asp-route-id="@Model.Customer.Id">&larr; Tillbaka</a>
+</div>
 <h1><i class="fa-solid fa-pencil"></i>  <i class="fa-solid fa-user"></i> </h1>
 
 <hr />
-
 
 <div>
     <div class="form">
@@ -43,7 +39,7 @@
                 <span asp-validation-for="Customer.Password"></span>
             </div>
             <div>
-                <input type="submit" value="Save" class="input-button" />
+                <input type="submit" value="Spara" class="input-button" />
             </div>
         </form>
     </div>

@@ -73,14 +73,13 @@ namespace RazorFriberg.Data.Repository
 
 
 
-
         public Rent GetRent(int id)
         {
             return appDBctx.Rents.Include(r=>r.Car).Include(r=>r.Customer).FirstOrDefault(c => c.Id == id);
         }
         public IEnumerable<Rent> GetRents()
         {
-            return appDBctx.Rents.Include(r=>r.Car).Include(r=>r.Customer).OrderBy(r => r.Id);
+            return appDBctx.Rents.Include(r=>r.Car).Include(r=>r.Customer).OrderByDescending(r => r.StartDate);
         }
         public void RemoveRent(Rent rent) 
         {

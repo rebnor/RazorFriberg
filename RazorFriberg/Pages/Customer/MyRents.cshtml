@@ -13,7 +13,7 @@
     // TODO: Färg/Knapp?
 }
 <p>
-    <a asp-page="CreateRent" asp-route-id="@Model.Customer.Id">Create New</a>
+    <a asp-page="CreateRent" asp-route-id="@Model.Customer.Id">Lägg ny bokning</a>
 </p>
 <table class="table">
     <thead>
@@ -31,12 +31,12 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Rent) {
-            var isReturnDateBehindToday = item.RenturnDate <= DateTime.Today;
-            var isStartDateClose = item.StartDate == DateTime.Today;
-            var rowClass = isReturnDateBehindToday ? "past-due" : "";
-            var rowDate = isStartDateClose ? "close" : "";
-
+    @foreach (var item in Model.Rent) {
+        // Dessa booleans för att fixa med design. Gul = Hämning idag (som påminnelse). Röd = Gammal bokning.
+        var isReturnDateBehindToday = item.RenturnDate <= DateTime.Today; // Om slutdatum är efter/samma som dagens datum
+        var isStartDateClose = item.StartDate == DateTime.Today; // Om startdatum är dagens datum
+        var rowClass = isReturnDateBehindToday ? "past-due" : "";
+        var rowDate = isStartDateClose ? "close" : "";
 
         <tr class="@rowClass">
             <td>
@@ -49,9 +49,10 @@
                 @Html.DisplayFor(modelItem => item.RenturnDate)
             </td>
             <td class="edits">
-                    <a asp-page="./DetailsRent" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a>
+                <a asp-page="./DetailsRent" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a>
             </td>
         </tr>
         }
     </tbody>
 </table>
+

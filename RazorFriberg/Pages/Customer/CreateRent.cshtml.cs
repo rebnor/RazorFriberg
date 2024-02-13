@@ -26,11 +26,9 @@ namespace RazorFriberg.Pages.Customer
         public Data.Models.Customer Customer { get; set; } = default!;
         public Car Car { get; set; } = default!;
 
-
         public async Task OnGetAsync(Data.Models.Customer customer)
         {
-            var thecustomer = cusRep.GetCustumer(customer.Id);
-            Customer = thecustomer;
+            Customer = cusRep.GetCustumer(customer.Id);
         }
 
         public async Task<IActionResult> OnPostAsync(Rent rent, Data.Models.Customer customer)
@@ -43,10 +41,10 @@ namespace RazorFriberg.Pages.Customer
             }
             Car = car;
             rent.Car = car;
-            var newRent = cusRep.CreateRent(rent);
 
-            return RedirectToPage("MyRents", newRent.Customer);
+            Rent = cusRep.CreateRent(rent);
+
+            return RedirectToPage("BookingConfirmed", new { id = Rent.Id });
         }
-
     }
 }

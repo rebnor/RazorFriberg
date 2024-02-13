@@ -35,28 +35,19 @@ namespace RazorFriberg.Pages.Customer
             }
             else
             {
-                if (rent.StartDate >= DateTime.Now)
-                {
-                    Rent = rent;
-                    Customer = customer;
-                    ViewData["TotalPrice"] = $"{(Rent.RenturnDate.Date - Rent.StartDate.Date).TotalDays * Rent.Car.PricePerDay}";
-                } 
-                else 
-                {
-                    RedirectToPage("MyRents", customer);
-                }
+                Rent = rent;
+                Customer = customer;
+                ViewData["TotalPrice"] = $"{(Rent.RenturnDate.Date - Rent.StartDate.Date).TotalDays * Rent.Car.PricePerDay}";
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-
             var rent = await cusRep.GetRentById(id);
             var customer = cusRep.GetCustumer(rent.Customer.Id);
             if (rent != null)
             {
-                Rent = rent;
                 cusRep.RemoveBooking(rent);
             }
             return RedirectToPage("MyRents", customer);

@@ -37,7 +37,7 @@ namespace RazorFriberg.Pages.Customer
             Customer = customer;
             return Page();
         }
-
+        // TODO: Gör spara knappen osynlig tills person ändrat något
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

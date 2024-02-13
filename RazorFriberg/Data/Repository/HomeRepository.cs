@@ -11,73 +11,48 @@ namespace RazorFriberg.Data.Repository
     public class HomeRepository : IHome
     {
         private readonly RazorFribergContext appDBctx;
-
         public HomeRepository(RazorFribergContext appDBctx)
         {
             this.appDBctx = appDBctx;
         }
 
-        public IEnumerable<Car> GetRentableCars()
-        {
-            return appDBctx.Cars.Where(c=>c.IsRented == false);
-        }
-
         public Customer GetCustomerByEmail(string email)
         {
-            return appDBctx.Customers.FirstOrDefault(c=>c.Email == email);
+            return appDBctx.Customers.FirstOrDefault(c => c.Email == email);
         }
-
-        public Admin GetAdminByUsername(string username)
+        public Customer GetCustomerPassword(string password)
         {
-            return appDBctx.Admins.FirstOrDefault(a=>a.UserName == username);
+            return appDBctx.Customers.FirstOrDefault(c => c.Password == password);
         }
-
         public Customer AddCustomer(Customer customer)
         {
             appDBctx.Add(customer);
             appDBctx.SaveChanges();
             return customer;
         }
-
-        public Car GetCarById(int id)
-        {
-            return appDBctx.Cars.FirstOrDefault(c=>c.Id == id);
-        }
-
-        public Rent AddRent(Rent rent)
-        {
-            appDBctx.Add(rent);
-            appDBctx.SaveChanges();
-            return rent; 
-        }
-
         public Customer GetCustomerById(int? id)
         {
-            return appDBctx.Customers.FirstOrDefault(c=>c.Id == id);
+            return appDBctx.Customers.FirstOrDefault(c => c.Id == id);
         }
 
-        public Rent GetRentById(int id)
+
+        public Admin GetAdminByUsername(string username)
         {
-            return appDBctx.Rents.FirstOrDefault(r=>r.Id == id);
+            return appDBctx.Admins.FirstOrDefault(a => a.UserName == username);
         }
-
-
-        public IEnumerable<Car> GetAllCars()
+        public Admin GetAdminPassword(string password)
         {
-            return appDBctx.Cars.OrderBy(c => c.Brand);
+            return appDBctx.Admins.FirstOrDefault(a => a.Password == password);
         }
 
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public Car GetCarById(int? id)
         {
-            return appDBctx.Customers.OrderBy(c => c.Id);
+            return appDBctx.Cars.FirstOrDefault(c => c.Id == id);
         }
-        public IEnumerable<Rent> GetRents()
+        public Task<List<Car>> GetAllCars()
         {
-            return appDBctx.Rents.OrderBy(r => r.StartDate);
+            return appDBctx.Cars.OrderBy(c => c.PricePerDay).ToListAsync();
         }
-
-
-
     }
 }

@@ -34,16 +34,5 @@ namespace RazorFriberg.Pages.Customer
             ViewData["User"] = $"{customer.FirstName} {customer.LastName}";
             Customer = customer;
         }
-
-        //public async Task<IActionResult> OnPostAsync(int? id)
-        //{
-        //    var customer = cusRep.GetCustumer(id);
-        //    if (customer != null)
-        //    {
-        //        return RedirectToPage("MyRents", customer);
-        //    }
-        //    return Page();
-        //}
-
     }
 }

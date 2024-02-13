@@ -47,7 +47,7 @@ namespace RazorFriberg.Data.Repository
         public void RemoveMembership(Customer customer)
         {
             appDBctx.Remove(customer);
-            appDBctx.SaveChangesAsync();
+            appDBctx.SaveChanges();
         }
         public Car GetCarById(int id)
         {

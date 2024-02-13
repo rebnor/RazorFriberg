@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RazorFriberg.Data.Interface;
 
 namespace RazorFriberg.Pages
 {
     public class LogInCustomerModel : PageModel
     {
-        private readonly RazorFriberg.Data.RazorFribergContext _context;
+        private readonly IHome homeRep;
 
-        public LogInCustomerModel(RazorFriberg.Data.RazorFribergContext context)
+        public LogInCustomerModel(IHome homeRep)
         {
-            _context = context;
+            this.homeRep = homeRep;
         }
 
         [BindProperty]
@@ -32,24 +33,25 @@ namespace RazorFriberg.Pages
             {
                 ViewData["Wrong"] = "";
                 var theCustomer = new Data.Models.Customer();
-                if (!EmailExists(customer.Email)) // letar email
+                var ce = homeRep.GetCustomerByEmail(customer.Email); // letar email
+                var cp = homeRep.GetCustomerPassword(customer.Password); // letar lösen
+
+                if (ce == null) 
                 {
                     ViewData["Wrong"] = "Fel Email!";
                     return Page();
                 }
-                if (!PasswordExists(customer.Password))
+
+                if (cp == null)
                 {
                     ViewData["Wrong"] = "Fel Lösenord!";
                     return Page();
                 }
-                var cp = new Data.Models.Customer();
-                var ce = new Data.Models.Customer();
-                cp = _context.Customers.FirstOrDefault(a => a.Password == customer.Password);
-                ce = _context.Customers.FirstOrDefault(a => a.Email == customer.Email);
-                if (cp == ce)
+
+                if (cp == ce) // ser att email och lösen är samma
                 {
                     theCustomer = ce;
-                    return RedirectToPage("Customer/Index", theCustomer);
+                    return RedirectToPage("Customer/Index", theCustomer); // loggar in
                 }
                 else
                 {
@@ -59,15 +61,5 @@ namespace RazorFriberg.Pages
             return Page();
 
         }
-
-        private bool EmailExists(string email)
-        {
-            return _context.Customers.Any(e => e.Email == email);
-        }
-        private bool PasswordExists(string password)
-        {
-            return _context.Customers.Any(e => e.Password == password);
-        }
-
     }
 }
